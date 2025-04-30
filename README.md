@@ -1,6 +1,8 @@
 # packer-lxd-examples
 
-## Prerequistes
+Building LXD images using Packer.
+
+## Prerequisites
 
 Add apt repository.
 ```
@@ -15,7 +17,7 @@ sudo apt-get update
 sudo apt-get install packer
 ```
 
-## Buidling LXD images
+## Building LXD images
 
 Invoke the following command.
 ```
