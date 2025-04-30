@@ -1,0 +1,27 @@
+name: develop
+description: For image development purpose
+config:
+  user.user-data: |
+    #cloud-config
+    users: []
+    ssh_pwauth: true
+    chpasswd:
+      expire: false
+      users:
+        - name: user1
+          password: $6$EioZtEpQ//S3Fvyg$FROs9q9mkrzQAg43olkR.KXVfFeEtzpSl3W/wrE.0tL.hxKHc2TXfqq/YtsN1Z2hNKZ86T5gXaxX51eXJnQlS.
+devices:
+  eth0:
+    name: eth0
+    network: lxdbr0
+    type: nic
+  rdp:
+    # for accepting RDP connections
+    bind: host
+    connect: tcp:0.0.0.0:3389
+    listen: tcp:0.0.0.0:3389
+    type: proxy
+  root:
+    path: /
+    pool: default
+    type: disk
