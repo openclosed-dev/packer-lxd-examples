@@ -2,6 +2,7 @@
 set -eu
 
 apt-get install -y --no-install-recommends \
+  curl \
   openssh-server \
   lightdm \
   lxde \

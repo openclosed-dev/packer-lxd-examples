@@ -32,7 +32,7 @@ build {
     inline = [
       "apt-get update",
       "apt-get upgrade -y",
-      "apt-get install -y --no-install-recommends openssh-server"
+      "apt-get install -y --no-install-recommends curl openssh-server"
     ]
   }
 
