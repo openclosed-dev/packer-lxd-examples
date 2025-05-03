@@ -9,10 +9,10 @@ packer {
 
 source "lxd" "debian" {
   image        = "images:debian/bookworm/cloud"
-  output_image = "debian-desktop"
+  output_image = "debian-gui"
   skip_publish = false
   publish_properties = {
-    description = "Debian 12 Desktop built by Packer"
+    description = "Debian 12 GUI built by Packer"
   }
 }
 

@@ -9,10 +9,10 @@ packer {
 
 source "lxd" "ubuntu" {
   image        = "ubuntu:24.04"
-  output_image = "ubuntu-tui"
+  output_image = "ubuntu-cui"
   skip_publish = false
   publish_properties = {
-    description = "Ubuntu 24.04 Text UI built by Packer"
+    description = "Ubuntu 24.04 CUI built by Packer"
   }
 }
 
