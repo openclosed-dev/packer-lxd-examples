@@ -10,6 +10,10 @@ packer {
 source "lxd" "debian" {
   image        = "images:debian/bookworm/cloud"
   output_image = "debian-cui"
+  launch_config = {
+    // Run without the default user
+    "user.user-data" = "#cloud-config\nusers: []"
+  }
   skip_publish = false
   publish_properties = {
     description = "Debian 12 CUI built by Packer"
@@ -20,8 +24,8 @@ build {
   sources = ["lxd.debian"]
 
   provisioner "shell" {
-    inline = [
-      "printenv | sort",
+    scripts = [
+      "scripts/fix-cloud.sh",
     ]
   }
 
