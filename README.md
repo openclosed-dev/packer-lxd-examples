@@ -4,28 +4,86 @@ Building LXD images using Packer.
 
 ## Prerequisites
 
-Add apt repository.
-```
-curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo tee /etc/apt/keyrings/hashicorp.asc > /dev/null
-echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/hashicorp.asc] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sou
-rces.list.d/hashicorp.list > /dev/null
+* Ubuntu 24.04 LTS (may run on WSL)
+* [LXD](https://canonical.com/lxd) 5.21.3 LTS or higher
+* [Packer](https://developer.hashicorp.com/packer/install) v1.12.0 or higher
+* [Packer LXD plugin](https://developer.hashicorp.com/packer/integrations/hashicorp/lxd/latest/components/builder/lxd) 1.0.2 or higher
+* (optional) APT-Cacher NG
+
+### Installing LXD
+
+Install LXD from Snap.
+```shell
+sudo snap install lxd
 ```
 
-Install Packer as follows.
+Add your account to `lxd` gorup.
+```shell
+sudo usermod -aG lxd $USER
+newgrp lxd
+# checks your groups
+groups
 ```
+
+Initialize the LXD service using default configuration.
+```shell
+lxd init --auto
+```
+
+Create a profile predefined for testing purpose.
+```shell
+lxc profile create develop < develop.yaml
+# checks the created profile
+lxc profile list
+```
+
+### Installing Packer
+
+Add an apt repository managed by HashiCorp.
+```shell
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo tee /etc/apt/keyrings/hashicorp.asc > /dev/null
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/hashicorp.asc] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
+```
+
+Install Packer from the newly added repository.
+```shell
 sudo apt-get update
 sudo apt-get install packer
 ```
 
+And the following command adds an LXD plugin under your home directory.
+```shell
+cd <path/to/image/directory>
+packer init .
+```
+
 ## Building LXD images
 
-Invoke the following command.
+Delete the image if already exists.
+```shell
+lxd image delete <image-alias>
 ```
+
+
+Invoke the following command.
+```shell
 cd <path/to/image/directory>
 packer build .
 ```
 
 Images built are registered in the local image cache.
-```
+```shell
 lxc image list
 ```
+
+## Running LXD containers
+
+The built images can be run with the following command.
+```shell
+lxc launch <image-alias> <container-name> -p develop
+```
+
+With `develop` profile specified, the containers equipped with GUI accept RDP connection. 
+The target IP address is that of the Ubuntu machine hosting the container. 
+
+The login credentials provided by these examples are `user1`/`secret`, which must be changed in production environment.
