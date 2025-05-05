@@ -6,7 +6,7 @@ Building LXD images using Packer.
 
 * Ubuntu 24.04 LTS (may run on WSL)
 * [LXD](https://canonical.com/lxd) 5.21.3 LTS or higher
-* [Packer](https://developer.hashicorp.com/packer/install) v1.12.0 or higher
+* [Packer](https://developer.hashicorp.com/packer/install) 1.12.0 or higher
 * [Packer LXD plugin](https://developer.hashicorp.com/packer/integrations/hashicorp/lxd/latest/components/builder/lxd) 1.0.2 or higher
 * (optional) APT-Cacher NG
 
@@ -21,7 +21,7 @@ Add your account to `lxd` gorup.
 ```shell
 sudo usermod -aG lxd $USER
 newgrp lxd
-# checks your groups
+# Checks your groups
 groups
 ```
 
@@ -33,7 +33,7 @@ lxd init --auto
 Create a profile predefined for testing purpose.
 ```shell
 lxc profile create develop < develop.yaml
-# checks the created profile
+# Checks the created profile
 lxc profile list
 ```
 
@@ -87,3 +87,24 @@ With `develop` profile specified, the containers equipped with GUI accept RDP co
 The target IP address is that of the Ubuntu machine hosting the container. 
 
 The login credentials provided by these examples are `user1`/`secret`, which must be changed in production environment.
+
+## Advanced settings
+
+### Caching apt packages for faster build
+
+Install _apt-cacher-ng_ for locally caching the packages downloaded from the apt repositories over HTTP protocol.
+
+```shell
+# Installs apt-cacher-ng 
+sudo apt install apt-cacher-ng
+# Checks the service is up and running
+systemctl status apt-cacher-ng
+```
+
+```shell
+export LXD_APT_PROXY='<gateway IP address of lxdbr0 network>'
+# Subsequent builds may get performance gain
+```
+
+* The cached packages are persisted in the local `/var/cache/apt-cacher-ng` directory.
+* The packages fetched over HTTPS are not cached, and will be always downloaded directly from the remote repositories.
