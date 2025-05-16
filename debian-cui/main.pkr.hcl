@@ -17,6 +17,9 @@ source "lxd" "debian" {
   skip_publish = false
   publish_properties = {
     description = "Debian 12 CUI built by Packer"
+    os          = "Debian"
+    release     = "bookworm"
+    variant     = "cloud"
   }
 }
 
@@ -37,12 +40,6 @@ build {
       "apt-get update",
       "apt-get upgrade -y",
       "apt-get install -y --no-install-recommends curl openssh-server"
-    ]
-  }
-
-  provisioner "shell" {
-    inline = [
-      "useradd -m -s /bin/bash user1"
     ]
   }
 }

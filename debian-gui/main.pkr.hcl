@@ -17,6 +17,9 @@ source "lxd" "debian" {
   skip_publish = false
   publish_properties = {
     description = "Debian 12 GUI built by Packer"
+    os          = "Debian"
+    release     = "bookworm"
+    variant     = "cloud"
   }
 }
 
@@ -55,12 +58,6 @@ build {
     scripts = [
       "scripts/install-base.sh",
       "scripts/install-rdp.sh"
-    ]
-  }
-
-  provisioner "shell" {
-    inline = [
-      "useradd -m -s /bin/bash user1"
     ]
   }
 

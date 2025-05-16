@@ -10,9 +10,16 @@ packer {
 source "lxd" "ubuntu" {
   image        = "ubuntu:24.04"
   output_image = "ubuntu-gui"
+  launch_config = {
+    // Run without the default user
+    "user.user-data" = "#cloud-config\nusers: []"
+  }
   skip_publish = false
   publish_properties = {
     description = "Ubuntu 24.04 GUI built by Packer"
+    os          = "ubuntu"
+    release     = "noble"
+    version     = "24.04"
   }
 }
 
@@ -59,12 +66,6 @@ build {
   provisioner "file" {
     source      = "files/netplan.yaml"
     destination = "/etc/netplan/10-lxd.yaml"
-  }
-
-  provisioner "shell" {
-    inline = [
-      "useradd -m -s /bin/bash user1"
-    ]
   }
 
   provisioner "shell" {
