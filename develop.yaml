@@ -3,6 +3,7 @@ description: For image development purpose
 config:
   user.user-data: |
     #cloud-config
+    manage_etc_hosts: localhost
     ssh_pwauth: true
     users:
       - name: user1
