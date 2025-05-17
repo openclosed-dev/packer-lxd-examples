@@ -41,4 +41,10 @@ build {
       "apt-get upgrade -y"
     ]
   }
+
+  provisioner "shell" {
+    inline = [
+      "cloud-init clean --logs"
+    ]
+  }
 }

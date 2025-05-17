@@ -42,4 +42,10 @@ build {
       "apt-get install -y --no-install-recommends curl openssh-server"
     ]
   }
+
+  provisioner "shell" {
+    inline = [
+      "cloud-init clean --logs"
+    ]
+  }
 }
