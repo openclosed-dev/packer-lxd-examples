@@ -32,7 +32,7 @@ lxd init --auto
 
 Create a profile predefined for testing purpose.
 ```shell
-lxc profile create develop < develop.yaml
+lxc profile create develop < develop-profile.yaml
 # Checks the created profile
 lxc profile list
 ```
@@ -87,6 +87,12 @@ With `develop` profile specified, the containers equipped with GUI accept RDP co
 The target IP address is that of the Ubuntu machine hosting the container. 
 
 The login credentials provided by these examples are `user1`/`secret`, which must be changed in production environment.
+
+The password hash is generated with the following command and specified with `hashed_passwd` property in the profile.
+
+```shell
+openssl passwd -6 <password>
+```
 
 ## Advanced settings
 
