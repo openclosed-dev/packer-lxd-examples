@@ -28,7 +28,7 @@ build {
 
   provisioner "shell" {
     scripts = [
-      "scripts/fix-cloud.sh",
+      "scripts/root/fix-cloud.sh",
     ]
   }
 
@@ -37,7 +37,7 @@ build {
       APT_PROXY = var.apt_proxy
     }
     scripts = [
-      "scripts/add-apt-proxy.sh",
+      "scripts/root/add-apt-proxy.sh",
     ]
   }
 
@@ -56,8 +56,8 @@ build {
       DEBIAN_FRONTEND = "noninteractive"
     }
     scripts = [
-      "scripts/install-base.sh",
-      "scripts/install-rdp.sh"
+      "scripts/root/install-base.sh",
+      "scripts/root/install-rdp.sh"
     ]
   }
 

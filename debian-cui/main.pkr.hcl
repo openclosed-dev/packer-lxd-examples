@@ -28,7 +28,7 @@ build {
 
   provisioner "shell" {
     scripts = [
-      "scripts/fix-cloud.sh",
+      "scripts/root/fix-cloud.sh",
     ]
   }
 
