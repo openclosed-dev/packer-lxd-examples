@@ -63,7 +63,7 @@ build {
 
   provisioner "shell" {
     inline = [
-      "rm -f /etc/apt/apt.conf.d/01proxy"
+      "rm -f /etc/apt/apt.conf.d/01proxy",
       "cloud-init clean --logs"
     ]
   }

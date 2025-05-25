@@ -108,7 +108,7 @@ systemctl status apt-cacher-ng
 ```
 
 ```shell
-export LXD_APT_PROXY='<gateway IP address of lxdbr0 network>'
+export LXD_APT_PROXY=http://_gateway:3142
 # Subsequent builds may get performance gain
 ```
 
