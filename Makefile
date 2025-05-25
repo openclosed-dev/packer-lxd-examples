@@ -1,4 +1,4 @@
-images := debian-cui debian-gui ubuntu-cui ubuntu-gui
+images := debian-cui debian-gui ubuntu-cui ubuntu-gui ubuntu-gui-dconf ubuntu-gui-desktop-icon
 
 .PHONY: all format validate $(images)
 
