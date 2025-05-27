@@ -59,13 +59,25 @@ build {
       "scripts/root/install-base.sh",
       "scripts/root/install-desktop.sh",
       "scripts/root/install-rdp.sh",
-      "scripts/root/fix-rdp.sh",
     ]
   }
 
   provisioner "file" {
     source      = "files/netplan.yaml"
     destination = "/etc/netplan/10-lxd.yaml"
+  }
+
+  provisioner "file" {
+    source      = "files/startwm.sh"
+    destination = "/etc/skel/"
+  }
+
+  provisioner "shell" {
+    inline = [
+      "chown root:root /etc/netplan/10-lxd.yaml",
+      "chown root:root /etc/skel/startwm.sh",
+      "chmod u+x /etc/skel/startwm.sh",
+    ]
   }
 
   provisioner "shell" {
