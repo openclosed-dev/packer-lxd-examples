@@ -68,15 +68,16 @@ build {
   }
 
   provisioner "file" {
-    source      = "files/startwm.sh"
+    sources = [
+      "files/.xsessionrc"
+    ]
     destination = "/etc/skel/"
   }
 
   provisioner "shell" {
     inline = [
       "chown root:root /etc/netplan/10-lxd.yaml",
-      "chown root:root /etc/skel/startwm.sh",
-      "chmod u+x /etc/skel/startwm.sh",
+      "chown root:root /etc/skel/.xsessionrc",
     ]
   }
 
