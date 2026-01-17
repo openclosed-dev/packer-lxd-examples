@@ -7,4 +7,6 @@ apt-get install -y --no-install-recommends \
   kde-standard \
   kwin-x11 \
   qml-module-qt-labs-platform \
+  plasma-discover \
+  systemsettings \
   plasma-nm-
