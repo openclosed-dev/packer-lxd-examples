@@ -71,20 +71,20 @@ build {
   }
 
   provisioner "file" {
-    source      = "files/netplan.yaml"
-    destination = "/etc/netplan/10-lxd.yaml"
+    source      = "files/etc/netplan/10-lxd.yaml"
+    destination = "/etc/netplan/"
   }
 
   provisioner "file" {
     sources = [
-      "files/.xsessionrc"
+      "files/etc/skel/.xsessionrc"
     ]
     destination = "/etc/skel/"
   }
 
   provisioner "file" {
     sources = [
-      "files/.config/plasma-localerc"
+      "files/etc/skel/.config/plasma-localerc"
     ]
     destination = "/etc/skel/.config/"
   }

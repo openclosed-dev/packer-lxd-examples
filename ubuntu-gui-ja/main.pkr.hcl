@@ -64,13 +64,13 @@ build {
   }
 
   provisioner "file" {
-    source      = "files/netplan.yaml"
-    destination = "/etc/netplan/10-lxd.yaml"
+    source      = "files/etc/netplan/10-lxd.yaml"
+    destination = "/etc/netplan/"
   }
 
   provisioner "file" {
     sources = [
-      "files/.xsessionrc"
+      "files/etc/skel/.xsessionrc"
     ]
     destination = "/etc/skel/"
   }
